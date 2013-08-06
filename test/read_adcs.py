@@ -7,7 +7,7 @@ import bbb.adc as adc
 
 adcs = []
 for i in range(7):
-  adcs.append(adc.adc(i))
+    adcs.append(adc.adc(i))
 
 for i in range(7):
-  print "%s : %d " % (adcs[i], adcs[i].read())
+    print "%s : %d " % (adcs[i], adcs[i].read())
