@@ -11,4 +11,3 @@ for i in range(7):
 
 for i in range(7):
   print "%s : %d " % (adcs[i], adcs[i].read())
-

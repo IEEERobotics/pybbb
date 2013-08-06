@@ -1,4 +1,5 @@
-""" Access PWM devices via SysFS interface """
+"""Access PWM devices via SysFS interface."""
+
 
 class pwm(object):
 
@@ -13,8 +14,8 @@ class pwm(object):
       self.polarity = int(f.read())
 
   def __str__(self):
-    out = "PWM #%d: %d/%d, pol:%d" % (self.num, self.duty, self.period, self.polarity)
-    return out
+    return "PWM #{}: {}/{}, pol:{}".format(self.num, self.duty,
+                                           self.period, self.polarity)
 
   def set_duty(self, val):
     self.duty = val
@@ -28,7 +29,7 @@ class pwm(object):
 
   def set_polarity(self, val):
     self.polarity = val
-    # verify that the stop/start is actually necessary
+    # Verify that the stop/start is actually necessary
     self.stop()
     with open(self.sysfs + '/polarity', 'w') as f:
       f.write(str(val) + '\n')
@@ -37,8 +38,7 @@ class pwm(object):
   def stop(self):
     with open(self.sysfs + '/run', 'w') as f:
       f.write('0\n')
-    
+
   def start(self):
     with open(self.sysfs + '/run', 'w') as f:
       f.write('1\n')
-

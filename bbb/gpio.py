@@ -1,10 +1,12 @@
-""" Access GPIO pins via SysFS interface """
+"""Access GPIO pins via SysFS interface."""
+
+
 class gpio(object):
 
   def __init__(self, num):
     self.sysfs = '/sys/class/gpio/gpio' + str(num)
 
-  # TODO: convert to a property
+  # TODO: Convert to a property
   def set_value(self, val):
     with open(self.sysfs + '/value', 'w') as f:
       f.write(str(val) + '\n')
@@ -21,4 +23,3 @@ class gpio(object):
   def output(self):
     with open(self.sysfs + '/direction', 'w') as f:
       f.write('out\n')
-

@@ -1,13 +1,14 @@
-""" Access ADCs vias SysFS interface """
+"""Access ADCs vias SysFS interface."""
 
 import glob
+
 
 class adc(object):
 
   def __init__(self, num):
     self.num = num
-    # need to read a glob here, since numbering is not consistent
-    # TODO: verify num is reasonable (0-6)
+    # Need to read a glob here, since numbering is not consistent
+    # TODO: Verify num is reasonable (0-6)
     self.sysfs = glob.glob('/sys/devices/ocp.*/helper.*/AIN' + str(num))[0]
 
   def __str__(self):
@@ -26,4 +27,3 @@ class adc(object):
       except:
         pass
     return int(val)
-
