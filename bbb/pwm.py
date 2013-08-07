@@ -3,36 +3,51 @@
 
 class PWM(object):
 
-    def __init__(self, num):
+    def __init__(self, num, base_dir='/sys/class/pwm/pwm'):
         self.num = num
-        self.sysfs = '/sys/class/pwm/pwm' + str(num)
+        self.sysfs = base_dir + str(num)
         with open(self.sysfs + '/duty_ns', 'r') as f:
-            self.duty = int(f.read())
+            self._duty = int(f.read())
         with open(self.sysfs + '/period_ns', 'r') as f:
-            self.period = int(f.read())
+            self._period = int(f.read())
         with open(self.sysfs + '/polarity', 'r') as f:
-            self.polarity = int(f.read())
+            self._polarity = int(f.read())
 
     def __str__(self):
         return "PWM #{}: {}/{}, pol:{}".format(self.num, self.duty,
                                                self.period, self.polarity)
 
-    def set_duty(self, val):
-        self.duty = val
+    @property
+    def duty(self):
+        with open(self.sysfs + '/duty_ns', 'r') as f:
+            return int(f.read())
+
+    @duty.setter
+    def duty(self, duty):
         with open(self.sysfs + '/duty_ns', 'w') as f:
-            f.write(str(val) + '\n')
+            f.write(str(duty) + '\n')
 
-    def set_period(self, val):
-        self.period = val
+    @property
+    def period(self):
+        with open(self.sysfs + '/period_ns', 'r') as f:
+            return int(f.read())
+
+    @period.setter
+    def period(self, period):
         with open(self.sysfs + '/period_ns', 'w') as f:
-            f.write(str(val) + '\n')
+            f.write(str(period) + '\n')
 
-    def set_polarity(self, val):
-        self.polarity = val
-        # Verify that the stop/start is actually necessary
+    @property
+    def polarity(self):
+        with open(self.sysfs + '/polarity', 'r') as f:
+            return int(f.read())
+
+    @polarity.setter
+    def polarity(self, polarity):
+        # TODO: Verify that the stop/start is actually necessary
         self.stop()
         with open(self.sysfs + '/polarity', 'w') as f:
-            f.write(str(val) + '\n')
+            f.write(str(polarity) + '\n')
         self.start()
 
     def stop(self):

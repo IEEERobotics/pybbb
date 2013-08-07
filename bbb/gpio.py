@@ -3,18 +3,19 @@
 
 class GPIO(object):
 
-    def __init__(self, num):
-        self.sysfs = '/sys/class/gpio/gpio' + str(num)
+    def __init__(self, num, base_dir='/sys/class/gpio/gpio'):
+        self.sysfs = base_dir + str(num)
+        self._value = None
 
-    # TODO: Convert to a property
-    def set_value(self, val):
-        with open(self.sysfs + '/value', 'w') as f:
-            f.write(str(val) + '\n')
-
-    def get_value(self):
+    @property
+    def value(self):
         with open(self.sysfs + '/value', 'r') as f:
-            x = int(f.read())
-        return x
+            return int(f.read())
+
+    @value.setter
+    def value(self, value):
+        with open(self.sysfs + '/value', 'w') as f:
+            f.write(str(value) + '\n')
 
     def input(self):
         with open(self.sysfs + '/direction', 'w') as f:
