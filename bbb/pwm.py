@@ -3,9 +3,9 @@
 
 class pwm(object):
 
-    def __init__(self, num):
+    def __init__(self, num, base_dir='/sys/class/pwm/pwm'):
         self.num = num
-        self.sysfs = '/sys/class/pwm/pwm' + str(num)
+        self.sysfs = base_dir + str(num)
         with open(self.sysfs + '/duty_ns', 'r') as f:
             self._duty = int(f.read())
         with open(self.sysfs + '/period_ns', 'r') as f:
@@ -20,13 +20,12 @@ class pwm(object):
     @property
     def duty(self):
         with open(self.sysfs + '/duty_ns', 'r') as f:
-            return int(f.read(str(ds))
+            return int(f.read())
 
     @duty.setter
     def duty(self, duty):
         with open(self.sysfs + '/duty_ns', 'w') as f:
             f.write(str(duty) + '\n')
-        self._duty = duty # TODO(dfarrell07): Can this be removed?
 
     @property
     def period(self):
@@ -37,7 +36,6 @@ class pwm(object):
     def period(self, period):
         with open(self.sysfs + '/period_ns', 'w') as f:
             f.write(str(period) + '\n')
-        self._period = period # TODO(dfarrell07): Can this be removed?
 
     @property
     def polarity(self):
@@ -49,8 +47,7 @@ class pwm(object):
         # TODO: Verify that the stop/start is actually necessary
         self.stop()
         with open(self.sysfs + '/polarity', 'w') as f:
-            f.write(str(val) + '\n')
-        self._polarity = polarity # TODO(dfarrell07): Can this be removed?
+            f.write(str(polarity) + '\n')
         self.start()
 
     def stop(self):

@@ -3,8 +3,8 @@
 
 class gpio(object):
 
-    def __init__(self, num):
-        self.sysfs = '/sys/class/gpio/gpio' + str(num)
+    def __init__(self, num, base_dir='/sys/class/gpio/gpio'):
+        self.sysfs = base_dir + str(num)
         self._value = None
 
     @property
@@ -16,7 +16,6 @@ class gpio(object):
     def value(self, value):
         with open(self.sysfs + '/value', 'w') as f:
             f.write(str(value) + '\n')
-        self._value = value # TODO(dfarrell07): Can this be removed?
 
     def input(self):
         with open(self.sysfs + '/direction', 'w') as f:
