@@ -1,7 +1,7 @@
 """Access PWM devices via SysFS interface."""
 
 
-class pwm(object):
+class PWM(object):
 
     def __init__(self, num):
         self.num = num

@@ -3,7 +3,7 @@
 import glob
 
 
-class adc(object):
+class ADC(object):
 
     def __init__(self, num):
         self.num = num

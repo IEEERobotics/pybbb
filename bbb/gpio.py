@@ -1,7 +1,7 @@
 """Access GPIO pins via SysFS interface."""
 
 
-class gpio(object):
+class GPIO(object):
 
     def __init__(self, num):
         self.sysfs = '/sys/class/gpio/gpio' + str(num)
