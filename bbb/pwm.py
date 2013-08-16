@@ -6,12 +6,6 @@ class PWM(object):
     def __init__(self, num, base_dir='/sys/class/pwm/pwm'):
         self.num = num
         self.sysfs = base_dir + str(num)
-        with open(self.sysfs + '/duty_ns', 'r') as f:
-            self._duty = int(f.read())
-        with open(self.sysfs + '/period_ns', 'r') as f:
-            self._period = int(f.read())
-        with open(self.sysfs + '/polarity', 'r') as f:
-            self._polarity = int(f.read())
 
     def __str__(self):
         return "PWM #{}: {}/{}, pol:{}".format(self.num, self.duty,
