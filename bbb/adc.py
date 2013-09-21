@@ -5,11 +5,11 @@ import glob
 
 class ADC(object):
 
-    def __init__(self, num):
+    def __init__(self, num, base_filename='/sys/devices/ocp.*/helper.*/AIN'):
         self.num = num
         # Need to read a glob here, since numbering is not consistent
         # TODO: Verify num is reasonable (0-6)
-        self.sysfs = glob.glob('/sys/devices/ocp.*/helper.*/AIN' + str(num))[0]
+        self.sysfs = glob.glob(base_filename + str(num))[0]
 
     def __str__(self):
         out = "ADC#%d (%s)" % (self.num, self.sysfs)
