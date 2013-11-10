@@ -1,5 +1,7 @@
 """Access GPIO pins via SysFS interface."""
 
+import time
+
 
 class GPIO(object):
 
@@ -37,3 +39,17 @@ class GPIO(object):
     def output(self):
         with open(self.sysfs + '/direction', 'w') as f:
             f.write('out\n')
+
+    def pulse(self, duration=0.1):
+        """Actuate GPIO pin for a given duration.
+
+        :param duration: How long to keep the pin on (secs.).
+        :type duration: float
+
+        """
+        # Use try-finally in case we are interrupted in sleep
+        try:
+            self.value = 1
+            time.sleep(duration)
+        finally:
+            self.value = 0
