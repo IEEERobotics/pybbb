@@ -19,7 +19,6 @@ class PWM(object):
                                                self.period, self.polarity)
 
     def set_duty(self, val):
-        self.duty = val
         with open(self.sysfs + '/duty_ns', 'w') as f:
             f.write(str(val) + '\n')
 
@@ -30,7 +29,6 @@ class PWM(object):
     duty = property(get_duty, set_duty)
 
     def set_period(self, val):
-        self.period = val
         with open(self.sysfs + '/period_ns', 'w') as f:
             f.write(str(val) + '\n')
 
@@ -41,7 +39,6 @@ class PWM(object):
     period = property(get_period, set_period)
 
     def set_polarity(self, val):
-        self.polarity = val
         # verify that the stop/start is actually necessary
         self.stop()
         with open(self.sysfs + '/polarity', 'w') as f:
