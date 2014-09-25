@@ -11,4 +11,9 @@ class TestPWM(TestCase):
     def test_bad_init(self):
         with self.assertRaises(ValueError):
             pwm = PWM(0)
-            
+
+    def test_value_of_duty_cycle(self):
+        pwm = PWM(1)
+        for test_duty_cycle in range (0,100):
+            pwm.set_duty_percent(test_duty_cycle)
+            assert pwm.duty_percent == test_duty_cycle            

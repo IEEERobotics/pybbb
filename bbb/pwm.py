@@ -27,6 +27,18 @@ class PWM(object):
             return int(f.read())
 
     duty = property(get_duty, set_duty)
+    
+    # Sets duty cycle as a "percentage" of the time that the signal is on.
+    # ie: A 75% duty cycle would be on for 75 ms and off for 25.
+    def set_duty_percent(self, val):
+        with open(self.sysfs + '/duty_ns', 'w') as f:
+            f.write(str(val / 100 * period) + '\n')
+
+    def get_duty_percent(self, val):
+        with open(self.sysfs + '/duty_ns', 'r') as f:
+            return int(f.read()) / period * 100
+
+    duty_percent = property(get_duty_percent, set_duty_percent) 
 
     def set_period(self, val):
         with open(self.sysfs + '/period_ns', 'w') as f:
