@@ -37,7 +37,7 @@ class GPIO(object):
     def output(self):
         with open(self.direction_path, 'w') as f:
             f.write('out\n')
-        self.direction = 'in'
+        self.direction = 'out'
 
     def __str__(self):
         return "GPIO #{}: value:{}, direction:{}".format(self.num, self.value,
