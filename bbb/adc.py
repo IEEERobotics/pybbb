@@ -30,12 +30,12 @@ class ADC(object):
     @property
     def mV(self):
         # calculate from raw value for a little extra precision
-        return self.raw()*(1800.0/self.scale)
+        return self.raw() * (1800.0 / self.scale)
 
     @property
     def volts(self):
         # calculate from raw value for a little extra precision
-        return self.raw()*(1.8/self.scale)
+        return self.raw() * (1.8 / self.scale)
 
     def raw(self, repeat=None):
         """Raw ADC value read via sysfs entry
@@ -53,10 +53,10 @@ class ADC(object):
             while not val:
                 try:
                     # ~10% faster than using File.read()
-                    val = os.read(fd,4)
+                    val = os.read(fd, 4)
                 # resource can be temporarily unavailable
                 except (IOError, OSError):
                     pass
             os.close(fd)
-        #print val
+        # print val
         return int(val)

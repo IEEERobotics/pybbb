@@ -7,14 +7,15 @@ from bbb import GPIO, ADC
 
 adc_num = 6
 
+
 def time_it(func, n=100):
     t0 = time.time()
     for i in range(n):
         func()
     elapsed = time.time() - t0
-    each = elapsed/n
+    each = elapsed / n
     print " --> {:0.4f} sec total ({:0.3f} ms/read, {:d} Hz)".format(
-            elapsed, 1000 * each, int(1/each))
+        elapsed, 1000 * each, int(1 / each))
     print
 
 print "Reading GPIO via /sys interface..."
@@ -32,4 +33,3 @@ time_it(lambda: adc.volts)
 print "Reading GPIO via /sys interface..."
 gpio = GPIO(2)
 time_it(gpio.get_value, n=1000)
-

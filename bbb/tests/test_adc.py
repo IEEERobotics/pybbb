@@ -1,6 +1,7 @@
 from unittest import TestCase, expectedFailure
 from bbb import ADC
 
+
 class TestADC(TestCase):
 
     def test_init(self):
@@ -19,4 +20,3 @@ class TestADC(TestCase):
             adc = ADC(-1)
         with self.assertRaises(ValueError):
             adc = ADC(0, source='foo')
-            

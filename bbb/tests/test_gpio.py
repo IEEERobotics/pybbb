@@ -1,6 +1,7 @@
 from unittest import TestCase, expectedFailure
 from bbb import GPIO
 
+
 class TestGPIO(TestCase):
 
     @expectedFailure
@@ -11,4 +12,3 @@ class TestGPIO(TestCase):
     def test_bad_init(self):
         with self.assertRaises(ValueError):
             pwm = GPIO(0)
-            

@@ -22,6 +22,3 @@ print "Read {}: {}".format(gpio, gpio.value)
 print "Set {} --> {}".format(gpio, 0)
 gpio.set_value(0)
 print "Read {}: {}".format(gpio, gpio.value)
-
-
-

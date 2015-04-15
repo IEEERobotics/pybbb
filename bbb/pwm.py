@@ -1,5 +1,6 @@
 """ Access PWM devices via SysFS interface """
 
+
 class PWM(object):
 
     def __init__(self, num, base_dir='/sys/class/pwm/pwm'):
