@@ -18,7 +18,7 @@ class GPIO(object):
     def get_value(self):
         """ Approx 10kHz (0.10 ms per read), 70% faster than File.open() """
         fd = os.open(self.value_path, os.O_RDONLY)
-        val = os.read(fd,1)
+        val = os.read(fd, 1)
         os.close(fd)
         return ord(val[0]) - ord('0')
 

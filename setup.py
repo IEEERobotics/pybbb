@@ -19,7 +19,7 @@ setup(
   author_email='jeff@schornick.org',
   packages=find_packages(),
   include_package_data=True,
-  scripts = glob("examples/*"),
+  scripts=glob("examples/*"),
   zip_safe=True,
   test_suite=(pkg_name + '.tests'),
   platforms='any',
