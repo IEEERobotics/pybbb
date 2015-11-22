@@ -9,16 +9,16 @@ gpio_num = 3
 gpio = GPIO(gpio_num)
 gpio.output()
 
-print "start value {}: {}".format(gpio, gpio.value)
+print("start value {}: {}".format(gpio, gpio.value))
 
-print "Set {} --> {}".format(gpio, 0)
+print("Set {} --> {}".format(gpio, 0))
 gpio.set_value(0)
-print "Read {}: {}".format(gpio, gpio.value)
+print("Read {}: {}".format(gpio, gpio.value))
 
-print "Set {} --> {}".format(gpio, 1)
+print("Set {} --> {}".format(gpio, 1))
 gpio.set_value(1)
-print "Read {}: {}".format(gpio, gpio.value)
+print("Read {}: {}".format(gpio, gpio.value))
 
-print "Set {} --> {}".format(gpio, 0)
+print("Set {} --> {}".format(gpio, 0))
 gpio.set_value(0)
-print "Read {}: {}".format(gpio, gpio.value)
+print("Read {}: {}".format(gpio, gpio.value))
